@@ -6,6 +6,7 @@ const express = require("express");
 const path = require("path");
 
 const StudentsController = require("./app/controllers/StudentsController");
+const AuthenicationController = require("./app/controllers/AuthenicationController");
 
 const server = express();
 
@@ -28,6 +29,10 @@ server.post("/students/create", StudentsController.create);
 server.get("/students/:studentId?", StudentsController.main);
 server.post("/students/delete/:studentId?", StudentsController.delete);
 server.post("/students/:studentId?", StudentsController.update);
+server.post("/login", AuthenicationController.login);
+server.get("/login", AuthenicationController.renderLoginForm);
+server.post("/registration", AuthenicationController.create);
+server.get("/registration", AuthenicationController.renderRegForm)
 // fallback to error page
 server.use("*", function (req, res) {
   res.render("pages/error");
